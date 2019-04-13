@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Student</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  </head>
+
+  <body>
+	<div class="container">
+    
+  	<h4>Student ID: <span th:text="${student.id}"></span></h4>
+  	<h4>Student full name: <span th:text="${student.firstName + ' ' + student.lastName}"></span></h4>
+  	<h4>Student group name: <span th:text="${student.group.name}" th:if="${student.group}"></span></h4>
+	
+	
+		<!-- form action="#" th:action="@{/students}"
+						 th:object="${student}" method="POST">
+		
+			<input type="hidden" th:field="*{id}" /> 
+			
+			<input type="text" th:field="*{firstName}"
+					class="form-control mb-4 col-4" placeholder="First name">
+
+			<input type="text" th:field="*{lastName}"
+					class="form-control mb-4 col-4" placeholder="Last name">
+
+
+			    <select class="form-control" th:field="${group.id}" id="dropGroups">
+			    <option value="0">Group</option>
+			    <option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.name}"></option>
+			    </select>
+
+			
+			<button type="submit" class="btn btn-info col-2">Create</button>
+						
+		</form>
+  	
+  
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+	      <tr>
+	        <th>ID</th>
+	        <th>First Name</th>
+	      </tr>
+      </thead>
+      <tr th:each="student : ${students}">
+        <td th:text="${student.id}" />
+        <td th:text="${student.firstName + ' ' + student.lastName}" />
+      </tr>
+    </table -->
+  
+    <p>
+      <a href="../home.html" th:href="@{/students}">Back to Students</a>
+    </p>
+	</div>
+  </body>
+
+</html>
