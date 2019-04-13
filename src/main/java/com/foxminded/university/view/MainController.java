@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
@@ -30,13 +31,20 @@ public class MainController {
         return "index";
     }
     
+    @GetMapping("/student")
+    public String showStudent(@RequestParam("id") int id, Model model) {
+        
+        Student student = studentService.findById(id);
+        model.addAttribute("student", student);
+        
+        return "/students/student";
+    }
+    
     @GetMapping("/students")
     public String allStudents(Model model) {
         
         List<Student> students = studentService.findAll();
         List<Group> groups = groupService.findAll();
-        
-        System.out.println(groups);
         
         Student student = new Student();
         Group group = new Group();
@@ -50,10 +58,9 @@ public class MainController {
     }
     
     @PostMapping("/students")
-    public String createStudent(@ModelAttribute("student") Student student) {
-        
+    public String createStudent(@ModelAttribute("student") Student student, @ModelAttribute("group") Group group) {
+        student.setGroup(group);
         studentService.create(student);
         return "redirect:/students";
     }
-    
 }
