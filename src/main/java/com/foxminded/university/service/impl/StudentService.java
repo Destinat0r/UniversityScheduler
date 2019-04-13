@@ -1,11 +1,12 @@
 package com.foxminded.university.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//import org.springframework.beans.factory.annotation.Autowired;
+import com.foxminded.university.dao.DaoException;
 
 import com.foxminded.university.dao.StudentRepository;
 import com.foxminded.university.domain.Student;
@@ -29,10 +30,19 @@ public class StudentService implements EntityService<Student> {
 
     @Override
     public Student findById(int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
+        Optional<Student> result = studentRepository.findById(id);
+        
+        Student student = null;
+        
+        if (result.isPresent()) {
+            student = result.get();
+        } else {
+            throw new DaoException("Nothing found by id " + id);
+        }
+        
+        return student;
+    }
 
     @Override
     public Student update(Student t) {
@@ -51,7 +61,4 @@ public class StudentService implements EntityService<Student> {
         // TODO Auto-generated method stub
         
     }
-
-
-
 }
