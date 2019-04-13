@@ -5,15 +5,16 @@
   <head>
     <title>Good Thymes University</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+	h1, h3, h2 {
+	    text-align: center;
+	}
+    </style>
   </head>
 
   <body>
 	<div class="container">
-    <h1>Students</h1>
-  
-  	<p class="h4 mb-4">Save Student</p>
-	
 	
 		<form action="#" th:action="@{/students}"
 						 th:object="${student}" method="POST">
@@ -21,24 +22,25 @@
 			<!-- Add hidden form field to handle update --> 
 			<input type="hidden" th:field="*{id}" /> 
 			
-			<input type="text" th:field="*{firstName}"
+			<label for="firstName">First Name</label>
+			<input type="text" th:field="*{firstName}" id="firstName"
 					class="form-control mb-4 col-4" placeholder="First name">
 
-			<input type="text" th:field="*{lastName}"
+			<label for="lastName">Last Name</label>
+			<input type="text" th:field="*{lastName}" id="lastName"
 					class="form-control mb-4 col-4" placeholder="Last name">
-
-
-			    <select class="form-control" th:field="${group.id}" id="dropGroups">
-			    <option value="0">Group</option>
-			    <option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.name}"></option>
-			    </select>
-
+			
+			<label for="group">Group</label>
+		    <select class="form-control" th:field="${group}" id="group" name="groupId">
+		      <option value="0">No Group</option>
+		      <option th:each="group : ${groups}" th:value="${group}" th:text="${group.name}"></option>
+		    </select>
 			
 			<button type="submit" class="btn btn-info col-2">Create</button>
 						
 		</form>
   	
-  
+	<h1>Students</h1>  
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">
 	      <tr>
@@ -48,7 +50,8 @@
       </thead>
       <tr th:each="student : ${students}">
         <td th:text="${student.id}" />
-        <td th:text="${student.firstName + ' ' + student.lastName}" />
+        <td><a href="#" 
+   th:href="@{/student(id=${student.id})}"><span th:text="${student.firstName + ' ' + student.lastName}" ></span></a></td>
       </tr>
     </table>
   
