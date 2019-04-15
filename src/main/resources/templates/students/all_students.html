@@ -15,19 +15,14 @@
 
   <body>
 	<div class="container">
-	
 		<form action="#" th:action="@{/students}" th:object="${student}" method="POST">
-		
-			<!-- Add hidden form field to handle update --> 
 			<input type="hidden" th:field="*{id}" /> 
 			
 			<label for="firstName">First Name</label>
-			<input type="text" th:field="*{firstName}" id="firstName"
-					class="form-control mb-4 col-4" placeholder="First name">
-
+			<input type="text" th:field="*{firstName}" id="firstName" class="form-control mb-4 col-4" placeholder="First name">
+			
 			<label for="lastName">Last Name</label>
-			<input type="text" th:field="*{lastName}" id="lastName"
-					class="form-control mb-4 col-4" placeholder="Last name">
+			<input type="text" th:field="*{lastName}" id="lastName" class="form-control mb-4 col-4" placeholder="Last name">
 			
 			<label for="group">Group</label>
 		    <select class="form-control" th:field="*{group}" id="group" name="groupId">
@@ -36,7 +31,6 @@
 		    </select>
 			
 			<button type="submit" class="btn btn-info col-2">Create</button>
-						
 		</form>
   	
 	<h1>Students</h1>  

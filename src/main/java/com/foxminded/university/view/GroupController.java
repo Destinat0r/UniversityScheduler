@@ -54,5 +54,10 @@ public class GroupController {
         
         return "/groups/group";
     }
-
+    
+    @PostMapping("/group/delete")
+    public String delete(@ModelAttribute("id") int id) {
+        groupService.deleteById(id);
+        return "redirect:/groups";
+    }
 }

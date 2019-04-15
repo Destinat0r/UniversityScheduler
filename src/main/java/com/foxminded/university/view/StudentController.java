@@ -67,4 +67,10 @@ public class StudentController {
         
         return "/students/all_students";
     }
+    
+    @PostMapping("/student/delete")
+    public String delete(@ModelAttribute("id") int id) {
+        studentService.deleteById(id);
+        return "redirect:/students";
+    }
 }

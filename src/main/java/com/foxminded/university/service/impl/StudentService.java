@@ -33,7 +33,6 @@ public class StudentService implements EntityService<Student> {
     public Student findById(int id) {
 
         Optional<Student> result = studentRepository.findById(id);
-        
         Student student = null;
         
         if (result.isPresent()) {
@@ -51,12 +50,11 @@ public class StudentService implements EntityService<Student> {
     
     @Override
     public List<Student> findAll() {
-        
         return studentRepository.findAll();
     }
 
     @Override
     public void deleteById(int id) {
-        // TODO Auto-generated method stub
+        studentRepository.deleteById(id);
     }
 }

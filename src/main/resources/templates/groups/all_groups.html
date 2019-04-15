@@ -15,7 +15,6 @@
 
   <body>
 	<div class="container">
-	
 		<form th:action="@{/groups}" th:object="${group}" method="POST">
 			<input type="hidden" th:field="*{id}" /> 
 			
@@ -24,7 +23,7 @@
 
 			<button type="submit" class="btn btn-info col-2">Create</button>
 		</form>
-  	
+
 	<h1>Groups</h1>  
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">

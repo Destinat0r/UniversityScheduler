@@ -50,8 +50,6 @@ public class GroupService implements EntityService<Group> {
 
     @Override
     public void deleteById(int id) {
-        // TODO Auto-generated method stub
-        
+        groupRepository.deleteById(id);
     }
-
 }
