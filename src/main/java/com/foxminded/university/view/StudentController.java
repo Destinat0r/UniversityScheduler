@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.foxminded.university.domain.Group;
-import com.foxminded.university.domain.Student;
+import com.foxminded.university.model.Group;
+import com.foxminded.university.model.Student;
 import com.foxminded.university.service.impl.GroupService;
 import com.foxminded.university.service.impl.StudentService;
 
 @Controller
-public class MainController {
+public class StudentController {
     
     private StudentService studentService;
     private GroupService groupService;
     
-    public MainController(StudentService studentService, GroupService groupService) {
+    public StudentController(StudentService studentService, GroupService groupService) {
         this.studentService = studentService;
         this.groupService = groupService;
     }
@@ -30,11 +30,22 @@ public class MainController {
     public String index() {
         return "index";
     }
-    
+
+    @PostMapping("/students")
+    public String createStudent(@ModelAttribute("student") Student student) {
+        studentService.create(student);
+        return "redirect:/students";
+    }
+
     @GetMapping("/student")
     public String showStudent(@RequestParam("id") int id, Model model) {
         
         Student student = studentService.findById(id);
+        Group group = student.getGroup();
+        List<Group> groups = groupService.findAll();
+        model.addAttribute("groups", groups);
+        
+        model.addAttribute("group", group);
         model.addAttribute("student", student);
         
         return "/students/student";
@@ -55,12 +66,5 @@ public class MainController {
         model.addAttribute("group", group);
         
         return "/students/all_students";
-    }
-    
-    @PostMapping("/students")
-    public String createStudent(@ModelAttribute("student") Student student, @ModelAttribute("group") Group group) {
-        student.setGroup(group);
-        studentService.create(student);
-        return "redirect:/students";
     }
 }

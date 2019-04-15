@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Student</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  </head>
+
+  <body>
+	<div class="container">
+    
+  	<h4>ID: <span th:text="${group.id}"></span></h4>
+  	<h4>Name: <span th:text="${group.name}"></span></h4>
+	
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+	      <tr>
+	        <th>ID</th>
+	        <th>First Name</th>
+	      </tr>
+      </thead>
+      <tr th:each="student : ${students}">
+        <td th:text="${student.id}" />
+        <td th:text="${student.firstName + ' ' + student.lastName}" />
+      </tr>
+    </table>
+  
+    <p>
+      <a href="../home.html" th:href="@{/groups}">Back to Groups</a>
+    </p>
+	</div>
+  </body>
+
+</html>

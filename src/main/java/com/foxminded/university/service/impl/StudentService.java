@@ -7,21 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.foxminded.university.dao.DaoException;
-
 import com.foxminded.university.dao.StudentRepository;
-import com.foxminded.university.domain.Student;
+import com.foxminded.university.model.Student;
 import com.foxminded.university.service.EntityService;
 
 @Service
 public class StudentService implements EntityService<Student> {
 
     private StudentRepository studentRepository;
+    private GroupService groupService;
     
     @Autowired
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, GroupService groupService) {
         this.studentRepository = studentRepository;
+        this.groupService = groupService;
     }
-
+    
     @Override
     public Student create(Student student) {
         studentRepository.save(student);
@@ -44,10 +45,8 @@ public class StudentService implements EntityService<Student> {
         return student;
     }
 
-    @Override
-    public Student update(Student t) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Student> findAllByGroupId(int id) {
+        return groupService.findById(id).getStudents();
     }
     
     @Override
@@ -59,6 +58,5 @@ public class StudentService implements EntityService<Student> {
     @Override
     public void deleteById(int id) {
         // TODO Auto-generated method stub
-        
     }
 }

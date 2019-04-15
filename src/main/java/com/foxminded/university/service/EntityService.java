@@ -8,8 +8,6 @@ public interface EntityService<T> {
     
     T findById(int id);
     
-    T update(T t);
-    
     List<T> findAll();
     
     void deleteById(int id);

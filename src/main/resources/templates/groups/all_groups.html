@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Good Thymes University</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+	h1, h3, h2 {
+	    text-align: center;
+	}
+    </style>
+  </head>
+
+  <body>
+	<div class="container">
+	
+		<form th:action="@{/groups}" th:object="${group}" method="POST">
+			<input type="hidden" th:field="*{id}" /> 
+			
+			<label for="name">Name</label>
+			<input type="text" th:field="*{name}" id="name" class="form-control mb-4 col-4" placeholder="Name">
+
+			<button type="submit" class="btn btn-info col-2">Create</button>
+		</form>
+  	
+	<h1>Groups</h1>  
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+	      <tr>
+	        <th>ID</th>
+	        <th>Name</th>
+	      </tr>
+      </thead>
+      <tr th:each="group : ${groups}">
+        <td th:text="${group.id}" />
+        <td><a href="#" th:href="@{/group(id=${group.id})}"><span th:text="${group.name}" ></span></a></td>
+      </tr>
+    </table>
+  
+    <p>
+      <a href="../home.html" th:href="@{/}">Return to home</a>
+    </p>
+	</div>
+  </body>
+
+</html>

@@ -1,12 +1,14 @@
 package com.foxminded.university.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.foxminded.university.dao.DaoException;
 import com.foxminded.university.dao.GroupRepository;
-import com.foxminded.university.domain.Group;
+import com.foxminded.university.model.Group;
 import com.foxminded.university.service.EntityService;
 
 @Service
@@ -20,21 +22,24 @@ public class GroupService implements EntityService<Group> {
     }
 
     @Override
-    public Group create(Group t) {
-        // TODO Auto-generated method stub
-        return null;
+    public Group create(Group group) {
+        groupRepository.save(group);
+        return group;
     }
 
     @Override
     public Group findById(int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Group update(Group t) {
-        // TODO Auto-generated method stub
-        return null;
+        Optional<Group> result = groupRepository.findById(id);
+        
+        Group group = null;
+        
+        if (result.isPresent()) {
+            group = result.get();
+        } else {
+            throw new DaoException("Nothing found by id " + id);
+        }
+        
+        return group;
     }
 
     @Override
